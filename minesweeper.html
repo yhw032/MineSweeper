@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mine Sweeper</title>
+
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="script.js"></script>
+</head>
+<body oncontextmenu='return false'>
+    <div id="whitepanel"></div>
+    <div id="popup">-</div>
+    <div id="popup-back">　</div>
+    <div id="recordPanel">
+        <h3>Record - Size : <span id="recordSize"></span></h4>
+        <ul>
+            <li id="rec1"></li>
+            <li id="rec2"></li>
+            <li id="rec3"></li>
+            <li id="rec4"></li>
+            <li id="rec5"></li>
+            <li id="rec6"></li>
+            <li id="rec7"></li>
+            <li id="rec8"></li>
+            <li id="rec9"></li>
+            <li id="rec10"></li>
+        </ul>
+        <div id="closeRecord" onclick="toggleRecord()">Close</div>
+    </div>
+    <div id="recordPanelBackground" onclick="toggleRecord()"></div>
+
+    <h2>Mine Sweeper</h2>
+    <div id="status">
+        Mine left: <span id="mineLeft">0</span> Time: <span id="timer">00:00:00</span>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <img onclick="toggleSettingSection()" id="settingBtn"" src="./media/settingIcon.png" height="14px">
+        <img onclick="toggleRecord()" id="recordBtn"" src="./media/listIcon.png" height="14px">
+    </div>
+    <div id="controlPanel">
+        <div class="controlElement">
+            <div class="controlTitle">Row Size</div>
+            <div class="controlBtnSection">
+                <span onclick="setMapInfo('row', 1)" class="controlBtn">↑</span>
+                <span id="rowSize" class="controlNum">16</span>
+                <span onclick="setMapInfo('row', -1)" class="controlBtn">↓</span>
+            </div>
+        </div>
+        <div class="controlElement">
+            <div class="controlTitle">Col Size</div>
+            <div class="controlBtnSection">
+                <span onclick="setMapInfo('col', 1)" class="controlBtn">↑</span>
+                <span id="colSize" class="controlNum">16</span>
+                <span onclick="setMapInfo('col', -1)" class="controlBtn">↓</span>
+            </div>
+        </div>
+        <div class="controlElement">
+            <div class="controlTitle">Mine Amt.</div>
+            <div class="controlBtnSection">
+                <span onclick="setMapInfo('mine', 1)" class="controlBtn">↑</span>
+                <span id="mineAmt" class="controlNum">40</span>
+                <span onclick="setMapInfo('mine', -1)" class="controlBtn">↓</span>
+            </div>
+        </div>
+        <br>
+    </div>
+    <div class="refreshBtn" onclick="refreshStatus()">Refresh</div>
+    <!-- ↓↓↓ Mine Sweeper Map Section ↓↓↓ -->
+</body>
+</html>
