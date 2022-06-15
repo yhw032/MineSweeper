@@ -187,16 +187,16 @@ table {
 #recordPanel {
     z-index: 15;
     position: fixed;
-    top: -50%;
+    top: -70%;
     left: 50%;
-    transform: translate(-50%, 0);
+    transform: translate(-70%, 0);
     padding: 10px 50px;
     width: 200px; height: 330px;
     box-shadow: 0 0 15px -5px black;
     border-radius: 15px;
     background-color: white;
 
-    transition: top 300ms;
+    transition: top 400ms;
 }
 
 #recordPanel ul {
@@ -242,19 +242,21 @@ table {
     display: block;
     text-align: center;
     background-color: rgb(240, 240, 240);
+    
     border: rgb(240, 240, 240) solid 2px;
+    
     border-radius: 15px;
-    transition: background-color 400ms;
+    transition: background-color 200ms;
 }
 
 .refreshBtn:hover{
     background-color: rgb(230, 230, 230);
-    transition: background-color 400ms;
+    transition: background-color 200ms;
 }
 
 .refreshBtn:active{
     background-color: rgb(210, 210, 210);
-    transition: background-color 400ms;
+    transition: background-color 200ms;
 }
 
 table td {
@@ -271,11 +273,13 @@ table td {
 
 table td:hover{
     background-color: rgb(200, 200, 200);
+    transition: background-color 100ms;
 }
 
 .open {
     cursor: default;
     background-color: white;
+    transition: background-color ease-out 500ms;
 }
 
 .open:hover {
@@ -310,4 +314,37 @@ table td:hover{
     width: 20px;
 }
 
+.debugMine {
+    border: solid red 1px;
+}
 
+.last {
+    background-color: rgb(200, 200, 0);
+    animation: breathing 1000ms linear;
+    animation-iteration-count: infinite;
+
+}
+
+.last:hover {
+    background-color: rgb(200, 200, 0);
+}
+
+@-webkit-keyframes breathing {
+    0%, 100%{ background-color: rgb(220, 220, 0); }
+    50% { background-color: rgb(200, 200, 0); }
+}
+
+@-moz-keyframes breathing {
+    0%, 100%{ background-color: rgb(220, 220, 0); }
+    50% { background-color: rgb(200, 200, 0); }
+}
+
+@-o-keyframes breathing {
+    0%, 100%{ background-color: rgb(220, 220, 0); }
+    50% { background-color: rgb(200, 200, 0); }
+}
+
+@keyframes breathing {
+    0%, 100%{ background-color: rgb(220, 220, 0); }
+    50% { background-color: rgb(200, 200, 0); }
+}

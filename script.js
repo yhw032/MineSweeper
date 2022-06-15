@@ -1,3 +1,5 @@
+const DEBUG = 0;
+
 const MAXROW = 30;
 const MINROW = 9;
 const MAXCOL = 30;
@@ -25,7 +27,7 @@ function toggleRecord(){
         elem2.style.display = 'block';
     } else {
         isRecordOpened = 0;
-        elem.style.top = '-50%';
+        elem.style.top = '-70%';
         elem2.style.display = 'none';
     }
 }
@@ -153,8 +155,8 @@ function setMine(mineAmount){
     let targetElem;
 
     for(let i = 0; i < mineAmount; i++){
-        randRow = getRandomInt(1, ROW);
-        randCol = getRandomInt(1, COL);
+        randRow = getRandomInt(1, ROW + 1);
+        randCol = getRandomInt(1, COL + 1);
 
         targetElem = document.getElementById("c" + randRow + "-" + randCol);
         //console.log("[DEBUG] row : " + randRow + " // col : " + randCol + " // i : " + i);
@@ -163,6 +165,9 @@ function setMine(mineAmount){
             continue;
         } else {
             targetElem.classList.add("mine");
+            if(DEBUG == 1){
+                targetElem.classList.add("debugMine");
+            }
         }
     }
 }
@@ -180,13 +185,35 @@ function mouseClick(row, col){
 
     clickCnt++;
 
-    if(elem.classList.contains("flag") || elem.classList.contains("open")){
+    if(elem.classList.contains("flag")){
         return 0;
-    } else if(elem.classList.contains("mine")){
-        if(clickCnt != 1){
-            gameOver();
-            return 0;
+    } else if(elem.classList.contains("open")){
+        if(elem.classList.contains("boundary")){
+            let cnt = 0;
+            let elemSeek;
+            for(let i = row - 1; i <= row + 1; i++){
+                for(let j = col - 1; j <= col + 1; j++){
+                    if(i < 1 || j < 1 || i > ROW || j > COL){
+                        continue;
+                    }
+                    elemSeek = document.getElementById("c" + i + "-" + j);
+                    if(elemSeek.classList.contains("flag")){
+                        cnt++;
+                    }
+                }
+            }
+            if(cnt == parseInt(elem.innerHTML)){
+                seekBlanks(row, col);
+            }
         } else {
+            return 0;
+        }
+
+    } else if(elem.classList.contains("mine")){
+        if(clickCnt != 1){ 
+            gameOver(row, col);
+            return 0;
+        } else {    //첫번째 클릭 위치에 지뢰 있으면 지뢰 위치 변경
             elem.classList.remove("mine");
             setMine(1);
             openBlanks(row, col);
@@ -202,6 +229,11 @@ function openBlanks(row, col){
     let mineCnt = 0;
 
     elem = document.getElementById("c" + row + "-" + col);
+
+    if(elem.classList.contains("mine")){
+        gameOver(row, col);
+        return 0;
+    }
 
     for(let i = row - 1; i <= row + 1; i++){
         for(let j = col - 1; j <= col + 1; j++){
@@ -251,7 +283,10 @@ function seekBlanks(row, col){
             }
         }
     }
-    checkClear();
+
+    if(state != 1){
+        checkClear();
+    }
 }
 
 function setFlag(row, col){
@@ -340,8 +375,7 @@ function setRecordTime(size, time){
                 arr.splice(i, 0, time);
                 break;
             } else {
-                arr.push(time);
-                break;
+                continue;
             }
         }
 
@@ -367,7 +401,15 @@ function getRecordTime(size){
     }
 }
 
-function gameOver(){
+function clearAllRecord(){
+    localStorage.clear();
+    pushPopup("All Records Deleted", 3000);
+    for(let i = 1; i <= 10; i++){
+        document.getElementById("rec" + i).innerHTML = '';
+    }
+}
+
+function gameOver(lastRow, lastCol){
     let elem;
 
     state = 1;
@@ -377,6 +419,7 @@ function gameOver(){
     pushPopup("Game Over!");
 
     for(let i = 1; i <= ROW; i++){
+
         for(let j = 1; j <= COL; j++){
             elem = document.getElementById("c" + i + "-" + j);
             if(elem.classList.contains("open")){
@@ -394,7 +437,12 @@ function gameOver(){
                 elem.classList.add("open");
             }
         }
+
     }
+
+    elem = document.getElementById("c" + lastRow + "-" + lastCol);
+    elem.classList.add("last");
+
 }
 
 window.onload = function(){
@@ -406,7 +454,7 @@ function getRandomInt(min, max) {
     min = Math.ceil(min);
     max = Math.floor(max);
     return Math.floor(Math.random() * (max - min)) + min; //최댓값은 제외, 최솟값은 포함
-  }
+}
 
 function pushPopup(text, time = 3000){
     let elem = document.getElementById("popup");
@@ -443,7 +491,10 @@ function setTimer(f){
             min = 0;
         }
 
-        timer.innerHTML = ((hour < 10) ? "0" + hour : hour) + ":" + ((min < 10) ? "0" + min : min) + ":" + ((sec < 10) ? "0" + sec : sec);
+        timer.innerHTML = 
+        ((hour < 10) ? "0" + hour : hour) + ":" + 
+        ((min < 10) ? "0" + min : min) + ":" + 
+        ((sec < 10) ? "0" + sec : sec);
 
     }, 1000)
 
