@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
+
 body {
     background-color: white;
     -webkit-user-select:none; 
@@ -5,7 +7,11 @@ body {
     -ms-user-select:none; 
     user-select:none;
 
-    font-family: '넥슨 풋볼고딕 B', '나눔고딕', serif;
+    font-family: "Noto Sans", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 600;
+    font-style: normal;
+    font-variation-settings: "wdth" 100;
 
 }
 
@@ -45,7 +51,7 @@ table {
     opacity: 0;
 
     position: fixed;
-    width: 400px;
+    width: min(80%, 400px);
     left: 50%;
     transform: translate(-50%, 0);
     margin-top: 20px; padding: 20px;
@@ -115,8 +121,6 @@ table {
     margin: 0; padding: 0;
 
     text-align: center;
-
-    font-family: '넥슨 풋볼고딕 L', '나눔스퀘어라운드', serif;
 }
 
 #controlPanel .controlBtn {
@@ -127,7 +131,6 @@ table {
 
     margin: 0; padding: 0;
     background-color:rgb(240, 240, 240);
-    font-family: '나눔스퀘어라운드', serif;
 
     transition: background-color 100ms;
 }
@@ -194,7 +197,7 @@ table {
     position: fixed;
     top: -70%;
     left: 50%;
-    transform: translate(-70%, 0);
+    transform: translate(-50%, 0);
     padding: 10px 50px;
     width: 200px; height: 330px;
     box-shadow: 0 0 15px -5px black;
@@ -272,7 +275,6 @@ table td {
     width: 30px;
     height: 30px;
     line-height: 0px;
-    font-family: '넥슨 풋볼고딕 L', '나눔스퀘어라운드', serif;
 
     cursor: pointer;
     background-color: lightgrey;
