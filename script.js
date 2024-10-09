@@ -110,6 +110,9 @@ function mouseListner() {
             element.addEventListener("touchstart", function(){
                 longClickTimeout = setTimeout(function() {
                     setFlag(i, j);
+                    if(navigator.vibrate) {
+                        navigator.vibrate(50);
+                    }
                 }, LONGCLICK);
             });
 
