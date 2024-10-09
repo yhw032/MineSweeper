@@ -6,6 +6,7 @@ const MAXCOL = 30;
 const MINCOL = 9;
 const MAXMINE = 80;
 const MINMINE = 10;
+const LONGCLICK = 400;
 
 let ROW = 16;
 let COL = 16;
@@ -95,13 +96,30 @@ function mouseListner() {
 
     for(let i = 1; i <= ROW; i++){
         for(let j = 1; j <= COL; j++){
-            document.getElementById("c" + i + "-" + j).addEventListener("auxclick", function(){
+            const element = document.getElementById("c" + i + "-" + j);
+            let longClickTimeout;
+
+            element.addEventListener("auxclick", function(){
                 setFlag(i, j);
             })
 
-            document.getElementById("c" + i + "-" + j).addEventListener("click", function(){
+            element.addEventListener("click", function(){
                 mouseClick(i, j);
             })
+
+            element.addEventListener("touchstart", function(){
+                longClickTimeout = setTimeout(function() {
+                    setFlag(i, j);
+                }, LONGCLICK);
+            });
+
+            element.addEventListener("touchend", function() {
+                clearTimeout(longClickTimeout);
+            });
+
+            element.addEventListener("touchmove", function() {
+                clearTimeout(longClickTimeout);
+            });
         }
     }
 }
@@ -171,6 +189,8 @@ function setMine(mineAmount){
         }
     }
 }
+
+
 
 function mouseClick(row, col){
     let elem = document.getElementById("c" + row + "-" + col);

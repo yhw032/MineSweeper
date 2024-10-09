@@ -131,10 +131,11 @@ table {
 
     transition: background-color 100ms;
 }
-
+@media (hover: hover) {
 #controlPanel .controlBtn:hover {
     background-color: rgb(230, 230, 230);
     transition: background-color 100ms;
+}
 }
 
 #controlPanel .controlBtn:active {
@@ -147,17 +148,21 @@ table {
     transition: transform 300ms;
 }
 
+@media (hover: hover) {
 #settingBtn:hover{
     transform: rotate(0.5turn);
     transition: transform 300ms;
+}
 }
 
 #recordBtn {
     cursor: pointer;
 }
 
+@media (hover: hover) {
 #recordBtn:hover{
     animation: shake 300ms linear;
+}
 }
 
 @-webkit-keyframes shake {
@@ -230,8 +235,10 @@ table {
     cursor: pointer;
 }
 
+@media (hover: hover) {
 #closeRecord:hover{
     background-color: rgb(230, 230, 230);
+}
 }
 
 .refreshBtn {
@@ -249,9 +256,11 @@ table {
     transition: background-color 200ms;
 }
 
+@media (hover: hover) {
 .refreshBtn:hover{
     background-color: rgb(230, 230, 230);
     transition: background-color 200ms;
+}
 }
 
 .refreshBtn:active{
@@ -270,20 +279,23 @@ table td {
     border-radius: 5px;
 }
 
-
+@media (hover: hover) {
 table td:hover{
     background-color: rgb(200, 200, 200);
     transition: background-color 100ms;
+}
 }
 
 .open {
     cursor: default;
     background-color: white;
-    transition: background-color ease-out 500ms;
+    transition: background-color ease-out 200ms;
 }
 
+@media (hover: hover) {
 .open:hover {
     background-color: rgb(245, 245, 245);
+}
 }
 
 .flag {
@@ -291,8 +303,10 @@ table td:hover{
     background-color: rgb(150, 150, 150);
 }
 
+@media (hover: hover) {
 .flag:hover{
     background-color: rgb(180, 180, 180);
+}
 }
 
 .flag img{  
@@ -305,8 +319,10 @@ table td:hover{
     background-color: rgb(233, 100, 100);
 }
 
+@media (hover: hover) {
 .mineopen:hover {
     background-color: rgb(233, 100, 100);
+}
 }
 
 .mineopen img {
@@ -325,8 +341,10 @@ table td:hover{
 
 }
 
+@media (hover: hover) {
 .last:hover {
     background-color: rgb(200, 200, 0);
+}
 }
 
 @-webkit-keyframes breathing {
