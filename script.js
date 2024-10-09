@@ -107,7 +107,8 @@ function mouseListner() {
                 mouseClick(i, j);
             })
 
-            element.addEventListener("touchstart", function(){
+            element.addEventListener("touchstart", function(e) {
+                e.preventDefault();
                 longClickTimeout = setTimeout(function() {
                     setFlag(i, j);
                     if(navigator.vibrate) {
@@ -115,6 +116,10 @@ function mouseListner() {
                     }
                 }, LONGCLICK);
             });
+
+            element.addEventListener("contextmenu", function(e) {
+                e.preventDefault();
+            })
 
             element.addEventListener("touchend", function() {
                 clearTimeout(longClickTimeout);
